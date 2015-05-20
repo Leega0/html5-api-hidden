@@ -20,9 +20,9 @@
 
     <section class="main-content">
       <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>html5 页面切换api</h3>
 
-<p>html5 页面切换api</p>
+<p>可切换本页查看效果</p>
 
 <pre><code>(function(){
   'use strict';//use javascript strict mode
@@ -60,7 +60,35 @@
 
     </section>
 
-  
+  <script type="text/javascript">
+      (function(){
+  'use strict';//use javascript strict mode
+  var relTitle=document.title;//get and save current title
+  var hidden,visibilityChange;
+  if (typeof document.hidden!=="undefined") {
+    hidden="hidden";
+    visibilityChange = "visibilitychange";
+  }else if (typeof document.mozHidden !== "undefined") { // Firefox up to v17
+        hidden = "mozHidden";
+        visibilityChange = "mozvisibilitychange";
+  } else if (typeof document.webkitHidden !== "undefined") { // Chrome up to v32, Android up to v4.4, Blackberry up to v10
+        hidden = "webkitHidden";
+        visibilityChange = "webkitvisibilitychange";
+  }
+  function handlevisibilityChange(){
+    if (document[hidden]) {//if the tab is invisible,show some thing
+      document.title = '(●––●) 你好，我是大白';
+    }else{
+      document.title = relTitle;
+    }
+  }
+  if (typeof document.addEventListener==="undefined"&&typeof document[hidden]==="undefined") {//if the browser is unsupport html5~
+    alert("your browser is out of date,please update it!")
+  }else{
+    document.addEventListener(visibilityChange,handlevisibilityChange,false)//bind browser tab change event
+  }
+})();
+  </script>
   </body>
 </html>
 
